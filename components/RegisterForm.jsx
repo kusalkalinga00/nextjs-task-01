@@ -1,12 +1,27 @@
 import Link from "next/link";
-
-
+import { useState } from "react";
 
 export default function RegisterForm() {
+  const [newUser, setNewUser] = useState({});
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setNewUser((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("new user: ", newUser);
+  };
+
   return (
     <div className="h-screen w-full bg-gray-600 flex flex-col justify-center">
       <div className="">
-        <form className="max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg"
+        >
           <h2 className="text-4xl dark:text-white font-bold text-center">
             Register
           </h2>
@@ -18,6 +33,8 @@ export default function RegisterForm() {
               type="text"
               name="name"
               id="name"
+              value={newUser.name || ""}
+              onChange={handleChange}
               required
             />
           </div>
@@ -29,6 +46,8 @@ export default function RegisterForm() {
               type="email"
               name="email"
               id="email"
+              value={newUser.email || ""}
+              onChange={handleChange}
               required
             />
           </div>
@@ -41,6 +60,8 @@ export default function RegisterForm() {
               type="password"
               name="password"
               id="password"
+              value={newUser.password || ""}
+              onChange={handleChange}
               required
             />
           </div>
