@@ -1,8 +1,21 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RegisterUser } from "../slices/registerSlice";
 
 export default function RegisterForm() {
   const [newUser, setNewUser] = useState({});
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  //checking state
+  const isUserRegister = useSelector((state)=>state.register.registered)
+  console.log("is user register ?" , isUserRegister);
+
+  if (isUserRegister) {
+    router.push("/login");
+  }
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -13,6 +26,7 @@ export default function RegisterForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("new user: ", newUser);
+    dispatch(RegisterUser({newUser}))
   };
 
   return (
@@ -22,7 +36,7 @@ export default function RegisterForm() {
           onSubmit={handleSubmit}
           className="max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg"
         >
-          <h2 className="text-4xl dark:text-white font-bold text-center">
+          <h2 className="text-4xl text-white font-bold text-center">
             Register
           </h2>
           <div className="flex flex-col text-gray-400 py-2">

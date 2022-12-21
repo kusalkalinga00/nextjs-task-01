@@ -2,19 +2,18 @@ import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchUser } from "../slices/userSlice";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export default function LoginForm() {
-  //   const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
+  
   const [person, setPerson] = useState({});
   const dispatch = useDispatch();
   const router = useRouter();
   const userLoggedin = useSelector((state) => state.user.logged);
   console.log("logged in ?", userLoggedin);
-  
-  if (userLoggedin){
-    router.push("/dashboard")
+
+  if (userLoggedin) {
+    router.push("/dashboard");
   }
 
   const handleChange = (e) => {
@@ -24,16 +23,8 @@ export default function LoginForm() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (email && password) {
-    //   const user = { email, password };
-    //   console.log("user: ", user);
-    //   setPerson(user);
-    //   console.log("person :", person);
-    // } else {
-    //   console.log("empty");
-    // }
     console.log(person);
-    dispatch(FetchUser({person}))
+    dispatch(FetchUser({ person }));
   };
 
   return (
@@ -43,7 +34,7 @@ export default function LoginForm() {
           onSubmit={handleSubmit}
           className="max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg"
         >
-          <h2 className="text-4xl dark:text-white font-bold text-center">
+          <h2 className="text-4xl text-white font-bold text-center">
             Login in
           </h2>
 
@@ -56,7 +47,6 @@ export default function LoginForm() {
               name="email"
               id="email"
               value={person.email || ""}
-              //onChange={(e) => setEmail(e.target.value)}
               onChange={handleChange}
               required
             />
@@ -69,7 +59,6 @@ export default function LoginForm() {
               name="password"
               id="password"
               value={person.password || ""}
-              //onChange={(e) => setPassword(e.target.value)}
               onChange={handleChange}
               required
             />
