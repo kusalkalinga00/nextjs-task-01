@@ -9,9 +9,10 @@ export default function RegisterForm() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+
   //checking state
   const isUserRegister = useSelector((state)=>state.register.registered)
-  console.log("is user register ?" , isUserRegister);
+
 
   if (isUserRegister) {
     router.push("/login");
@@ -25,7 +26,6 @@ export default function RegisterForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("new user: ", newUser);
     dispatch(RegisterUser({newUser}))
   };
 
@@ -79,12 +79,15 @@ export default function RegisterForm() {
               required
             />
           </div>
+
           <button
             type="submit"
             className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40"
           >
             Register
           </button>
+
+
           <p className="text-gray-100">
             Already have an account?{" "}
             <Link

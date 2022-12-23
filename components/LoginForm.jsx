@@ -10,7 +10,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
   const router = useRouter();
   const userLoggedin = useSelector((state) => state.user.logged);
-  console.log("logged in ?", userLoggedin);
+  
 
   if (userLoggedin) {
     router.push("/dashboard");
@@ -23,7 +23,6 @@ export default function LoginForm() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(person);
     dispatch(FetchUser({ person }));
   };
 

@@ -4,6 +4,8 @@ import axios from "axios";
 const url =
   "https://ujkp2xeahs.us-east-1.awsapprunner.com/api/v1/authenticate/register";
 
+
+  //initial State
 const initialState = {
   loading: false,
   registered: false,
@@ -13,7 +15,6 @@ const initialState = {
 export const RegisterUser = createAsyncThunk(
   "register/RegisterUser",
   async ({ newUser }) => {
-    console.log("inside register user function", newUser);
     const response = await axios.post(url, newUser);
     return response.data;
   }
